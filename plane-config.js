@@ -1,8 +1,8 @@
 'use strict'
 
 const planeConfig = {
-  planeWidth : 5,
-  planeHeight : 5,
+  planeWidth: 5,
+  planeHeight: 5,
   planeStart: 0
 }
 
