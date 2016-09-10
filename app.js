@@ -34,23 +34,34 @@ function parseCommands(input){
 function parseInput(input) {
   //Regular expression pattern for matching exact input format
   let patternToMatch = /PLACE\s\d\D\d\D(NORTH|SOUTH|EAST|WEST)/g;
-
+  //test to see if input pattern matches
   let result = patternToMatch.test(input);
+  //if input pattern matches, deconstruct string
   if (result) {
+    //turn the string into an array of params
     let patternAsArray = input.split(/\s/);
-
+    //Remove the first index in the array, in this case [PLACE] it's not needed.
     let arrayOfParams = patternAsArray.pop();
-
+    // split the remainder on commas, to make available to pass as parameters to place function
     let params = arrayOfParams.split(",")
-
-
-    let x = params[0];
-
-    let y = params[1];
-
+    //store orientation in a variable, this will always be passed if it's up to this point.
     let f = params[2];
+    let x;
+    let y;
+    //Check to see if x value is valid (not greater than plane width, or less than 0)
+    if (parseInt(params[0]) <= plane.planeConfig.planeWidth && parseInt(params[0]) >= plane.planeConfig.planeStart) {
+      x = params[0];
+    } else {
+      return;
+    }
 
-
+    //Check to see if y value is valid (not greater than plane height, or less than 0)
+    if (parseInt(params[1]) <= plane.planeConfig.planeHeight && parseInt(params[1]) >= plane.planeConfig.planeStart) {
+      y = params[1];
+    } else {
+      return
+    }
+    //pass deconstructed string pieces as arguments for place function
     place(x,y,f)
 
   }

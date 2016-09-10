@@ -23,32 +23,36 @@ let robotControl = {
     let planeHeight = plane.planeConfig.planeHeight;
     let planeStart = plane.planeConfig.planeStart
 
-
+    // function to increment Y, called when facing NORTH
     function incrementY() {
+      //prevent any movements beyond the max height of the plane
       if (yAxis === planeHeight) {
         return;
       } else {
         state.robotState.yCoordinates += 1;
       }
     }
-
+    // function to increment X, called when facing EAST
     function incrementX() {
+      //prevent any movements beyond the max width of the plane
       if (xAxis === planeWidth) {
         return;
       } else {
         state.robotState.xCoordinates += 1;
       }
     }
-
+    // function to increment Y, called when facing SOUTH
     function decrementY() {
+      //prevent any movements beyond the edge of the plane (0 in this case)
       if (yAxis === planeStart) {
         return
       } else {
         state.robotState.yCoordinates -= 1;
       }
     }
-
+    // function to increment X, called when facing WEST
     function decrementX() {
+      //prevent any movements beyond the edge of the plane (0 in this case)
       if (xAxis === planeStart) {
         return;
       } else {
@@ -56,33 +60,28 @@ let robotControl = {
       }
     }
 
-
-
-    //increment or decrement X or Y axis based on orientation and coordinates of robot
+    //conditionally check orientation and call relevant function (increment or decrement each axis)
 
     if (face === "NORTH") {
-      console.log("moving north?")
       incrementY();
     }
 
     if (face === "EAST") {
-      console.log("moving east?")
       incrementX();
     }
 
     if (face === "SOUTH") {
-      console.log("moving south?")
       decrementY();
     }
 
     if (face === "WEST") {
-      console.log("moving west?")
       decrementX();
     }
 
   },
   left: function() {
     //Rotate robot counter-clockwise
+
     //Make the reference to robot orientation into a less verbose variable
     let orientation = state.robotState.orientation;
 
@@ -140,5 +139,5 @@ let robotControl = {
 }
 
 
-
+// export the robot controller function to make avaiable globally
 module.exports.robotControl = robotControl
