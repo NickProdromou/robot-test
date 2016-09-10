@@ -9,6 +9,7 @@ const readline = require('readline');
 
 console.log(robot.robotControl.place(2,4,'east'))
 
+
 //console.log(robot.robotControl.report())
 //process.stdin property returns a readable stream equivalent or associated with stdin (fd 0)
 
@@ -19,19 +20,28 @@ const rl = readline.createInterface({
 
 console.dir(`welcome to the thing, here is robot`)
 rl.on('line', (input) => {
-  console.log(`Received: ${input}`);
 
-  if (input === "PLACE") {
-    console.log("ROBOT HAS BEEN PLACED")
-  }
+  //Regular expression pattern for matching exact input format
+  let patternToMatch = /PLACE\s\d\D\d\D(NORTH|SOUTH|EAST|WEST)/g;
 
-  if (input === "TURN") {
-    console.log("ROBOT TURN")
-  }
+  let result = patternToMatch.test(input);
+    if (result) {
+      let patternAsArray = input.split(/\s/);
+      console.log(patternAsArray);
+      let arrayOfParams = patternAsArray.pop();
+      console.log(arrayOfParams);
+      let params = arrayOfParams.split(",")
+      console.log(params)
+    }
 
-  if (input === 'close') {
-    rl.close();
-  }
+
+
+  //
+  // if (input === /(NORTH|SOUTH|EAST|WEST)/i ) {
+  //       console.log(`Received: ${input}`);
+  // }
+  //
+
 
 });
 
