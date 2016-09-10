@@ -6,7 +6,6 @@ let robotState = {
   xCoordinates: "",
   YCoordinates: "",
   orientation: ""
-
 }
 
 module.exports.robotState = robotState

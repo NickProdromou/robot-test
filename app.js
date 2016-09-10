@@ -10,6 +10,17 @@ const readline = require('readline');
 console.log(robot.robotControl.place(2,4,'east'))
 
 
+
+// TODO: EACH TIME INPUT = TRUE, CHECK IF ROBOT STATE IS PLACED.
+  //IF ROBOT STATE === placed
+    //CHECK FOR COMMANDS - MOVE, LEFT, RIGHT, report
+
+  //IF ROBOT STATE != placed
+    // CHECK INPUT TO SEE IF PATTERN MATCHES FOR PLACEMENT
+      //PLACE ROBOT
+
+  //CONTINUE TO CHECK FOR INPUT IN THE FORM OF COMMANDS.
+
 //console.log(robot.robotControl.report())
 //process.stdin property returns a readable stream equivalent or associated with stdin (fd 0)
 
@@ -36,18 +47,11 @@ rl.on('line', (input) => {
 
 
 
-  //
-  // if (input === /(NORTH|SOUTH|EAST|WEST)/i ) {
-  //       console.log(`Received: ${input}`);
-  // }
-  //
+
+  if (input === /(NORTH|SOUTH|EAST|WEST)/i ) {
+        console.log(`Received: ${input}`);
+  }
 
 
+  rl.close();
 });
-
-// rl.question('What do you think of Node.js? ', (answer) => {
-//   // TODO: Log the answer in a database
-//   console.log('Thank you for your valuable feedback:', answer);
-//
-//   rl.close();
-// });
