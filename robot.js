@@ -1,10 +1,10 @@
 'use strict'
 
 //Require the module holding the robot state
-let state = require('./robot-state')
+let state = require('./robot-state').robotState;
 
 //require the module containing the rules for the plane
-let plane = require('./plane-config')
+let plane = require('./plane-config').planeConfig;
 
 //Create empty object literal for robot, to contain robot specific methods
 let robotControl = {
@@ -12,16 +12,16 @@ let robotControl = {
   move : function() {
 
     //Make the reference to robot orientation into a less verbose variable
-    let face = state.robotState.orientation;
+    let face = state.orientation;
 
     //Put reference to X and Y into less verbose variable
-    let xAxis = state.robotState.xCoordinates;
-    let yAxis = state.robotState.yCoordinates;
+    let xAxis = state.xCoordinates;
+    let yAxis = state.yCoordinates;
 
     // Put reference to default plane width and height and plane start into less verbose variable
-    let planeWidth = plane.planeConfig.planeWidth;
-    let planeHeight = plane.planeConfig.planeHeight;
-    let planeStart = plane.planeConfig.planeStart
+    let planeWidth = plane.planeWidth;
+    let planeHeight = plane.planeHeight;
+    let planeStart = plane.planeStart
 
     // function to increment Y, called when facing NORTH
     function incrementY() {
@@ -29,7 +29,7 @@ let robotControl = {
       if (yAxis === planeHeight) {
         return;
       } else {
-        state.robotState.yCoordinates += 1;
+        state.yCoordinates += 1;
       }
     }
     // function to increment X, called when facing EAST
@@ -38,7 +38,7 @@ let robotControl = {
       if (xAxis === planeWidth) {
         return;
       } else {
-        state.robotState.xCoordinates += 1;
+        state.xCoordinates += 1;
       }
     }
     // function to increment Y, called when facing SOUTH
@@ -47,7 +47,7 @@ let robotControl = {
       if (yAxis === planeStart) {
         return
       } else {
-        state.robotState.yCoordinates -= 1;
+        state.yCoordinates -= 1;
       }
     }
     // function to increment X, called when facing WEST
@@ -56,7 +56,7 @@ let robotControl = {
       if (xAxis === planeStart) {
         return;
       } else {
-        state.robotState.xCoordinates -= 1;
+        state.xCoordinates -= 1;
       }
     }
 
@@ -83,22 +83,22 @@ let robotControl = {
     //Rotate robot counter-clockwise
 
     //Make the reference to robot orientation into a less verbose variable
-    let orientation = state.robotState.orientation;
+    let orientation = state.orientation;
 
     if (orientation === "NORTH") {
-      state.robotState.orientation = "WEST";
+      state.orientation = "WEST";
     }
 
     if (orientation === "EAST") {
-      state.robotState.orientation = "NORTH";
+      state.orientation = "NORTH";
     }
 
     if (orientation === "SOUTH") {
-      state.robotState.orientation = "EAST";
+      state.orientation = "EAST";
     }
 
     if (orientation === "WEST") {
-      state.robotState.orientation = "NORTH";
+      state.orientation = "NORTH";
     }
 
   },
@@ -106,32 +106,31 @@ let robotControl = {
     //Rotate the robot clockwise
 
     //Make the reference to robot orientation into a less verbose variable
-    let orientation = state.robotState.orientation;
+    let orientation = state.orientation;
 
     if (orientation === "NORTH") {
-      state.robotState.orientation = "EAST";
+      state.orientation = "EAST";
     }
 
     if (orientation === "EAST") {
-      state.robotState.orientation = "SOUTH";
+      state.orientation = "SOUTH";
     }
 
     if (orientation === "SOUTH") {
-      state.robotState.orientation = "WEST";
+      state.orientation = "WEST";
     }
 
     if (orientation === "WEST") {
-      state.robotState.orientation = "NORTH";
+      state.orientation = "NORTH";
     }
 
   },
   report: function() {
     //check robot state and return X Y and Orientation
-    console.log(
-      `The current coordinates of the robot are
-       X: ${state.robotState.xCoordinates}
-       Y: ${state.robotState.yCoordinates}
-       Orientation: ${state.robotState.orientation}
+    console.log(`
+  The current coordinates of the robot are
+  X:${state.xCoordinates}, Y:${state.yCoordinates}
+  Orientation: ${state.orientation}
       `
     )
   }
